@@ -367,7 +367,8 @@
             if (!image.images) {
                 image = [UIImage decodedImageWithImage:image];
             }
-            if (CGSizeEqualToSize(image.size, CGSizeZero)) {
+            //fix sometimes one dimension of image size is zero
+            if (image.size.width == 0 || image.size.height == 0) {
                 completionBlock(nil, nil, [NSError errorWithDomain:@"SDWebImageErrorDomain" code:0 userInfo:@{NSLocalizedDescriptionKey : @"Downloaded image has 0 pixels"}], YES);
             }
             else {
